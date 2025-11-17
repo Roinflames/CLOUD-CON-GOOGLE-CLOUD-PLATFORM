@@ -3,6 +3,8 @@
 Esta guía contiene una selección de comandos útiles de `gcloud` para la gestión de recursos en Google Cloud Platform. Para una referencia más completa, puedes consultar la [hoja de trucos oficial de gcloud](https://docs.cloud.google.com/sdk/docs/cheatsheet?hl=es-419).
 
 ---
+##
+gcloud auth login
 
 ## 1. Configuración de Proyecto y SDK
 
@@ -11,7 +13,8 @@ Comandos para configurar el proyecto activo en el que `gcloud` ejecutará los co
 ### Establecer el Proyecto Activo
 Define el proyecto de GCP sobre el cual quieres trabajar. Todos los comandos posteriores se ejecutarán en el contexto de este proyecto.
 ```bash
-gcloud config set project ID_DEL_PROYECTO
+gcloud config set project PROJECT_ID
+gcloud config set project plantiwuisserviceacc
 ```
 
 ### Obtener el Proyecto Activo
@@ -20,9 +23,14 @@ Muestra el ID del proyecto que está configurado actualmente como activo.
 gcloud config get-value project
 ```
 
+### Habilitar API's en UI
+calendar-json.googleapis.com         Google Calendar API
+drive.googleapis.com                 Google Drive API
+gmail.googleapis.com                 Gmail API
+sheets.googleapis.com                Google Sheets API
 ---
-
-## 2. Instancias de Compute Engine
+ 
+## 2. Instancias de Compute Engine (Requiere habilitar facturación)
 
 Comandos para gestionar máquinas virtuales en GCP.
 
@@ -48,18 +56,22 @@ gcloud iam service-accounts list
 Muestra información detallada sobre una cuenta de servicio específica, incluyendo su `displayName` y `description`.
 ```bash
 gcloud iam service-accounts describe NOMBRE@ID_DEL_PROYECTO.iam.gserviceaccount.com
+gcloud iam service-accounts describe plantiwuisServiceAcc@plantiwuisserviceacc.iam.gserviceaccount.com
+gcloud iam service-accounts describe cloud-sernatur@plantiwuisserviceacc.iam.gserviceaccount.com
 ```
 
 ### Listar Claves de una Cuenta de Servicio
 Enumera las claves (keys) asociadas a una cuenta de servicio. Estas claves se usan para autenticación.
 ```bash
 gcloud iam service-accounts keys list --iam-account=NOMBRE@ID_DEL_PROYECTO.iam.gserviceaccount.com
+gcloud iam service-accounts keys list --iam-account=cloud-sernatur@plantiwuisserviceacc.iam.gserviceaccount.com
 ```
 
 ### Obtener Política de Permisos del Proyecto
 Muestra la política de IAM completa para el proyecto, detallando qué miembros (usuarios, grupos, cuentas de servicio) tienen qué roles.
 ```bash
 gcloud projects get-iam-policy ID_DEL_PROYECTO
+gcloud projects get-iam-policy plantiwuisserviceacc
 ```
 
 ---
