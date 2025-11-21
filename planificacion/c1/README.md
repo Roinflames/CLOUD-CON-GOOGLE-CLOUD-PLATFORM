@@ -26,3 +26,39 @@ Esta primera clase de 4 horas se centra en el **Módulo 1**, sentando las bases 
 ### **Actividades Prácticas:**
 *   Exposición teórica interactiva sobre la arquitectura y servicios de GCP.
 *   Demostración en vivo por parte del relator, navegando por la consola de GCP para ilustrar los conceptos de proyectos, IAM y facturación.
+
+#### GCloud CLI
+Luego de instalar el CLI de GCP podemos realizar las siguientes operaciones:
+
+
+```bash
+gcloud version
+gcloud auth login
+gcloud config list
+gcloud config set project [PROJECT_ID]
+```
+![alt text](<1 gcloud auth login.png>)
+
+```bash
+# List compute instances (CLI)
+gcloud compute instances list --filter="zone ~ ^us AND -machineType:f1-micro"
+```
+![alt text](<2 gcloud compute instances list.png>)
+
+```bash
+# Set Project (CLI)
+```
+![alt text](image.png)
+
+```bash
+# Services list (CLI)
+```
+![alt text](<4 gcloud services list.png>)
+
+```bash
+# Components Alpha (CLI)
+```
+![alt text](<6 gcloud components alpha.png>)
+
+#### GCloud UI - Proyectos 
+![alt text](<5 selecciona o crea un proyecto.png>)

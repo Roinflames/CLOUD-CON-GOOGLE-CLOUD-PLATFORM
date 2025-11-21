@@ -18,3 +18,12 @@ python main.py
 # ENABLE API
 https://console.cloud.google.com/apis/library/sqladmin.googleapis.com?project=plantiwuisserviceacc
 ```
+
+Ahora ya puedes:
+
+- crear tablas
+- insertar datos
+- probar ORM con SQLAlchemy
+- hacer un pool de conexiones
+- montar tu backend Flask/FastAPI
+- crear un script de inicialización de base
