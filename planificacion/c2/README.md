@@ -22,21 +22,25 @@ Esta clase de 4 horas inicia el **Módulo 2**, enfocándose en las soluciones de
     *   Control de acceso y permisos a nivel de bucket y objeto.
     *   Políticas de ciclo de vida de los objetos.
 3.  **Cloud SQL (Datos estructurados - Relacional):** <!-- Requiere habilitar facturación -->
-![alt text](image.png)
+    
+    ![alt text](image.png)
+    
     *   Creación y configuración de una instancia (MySQL 8.0, PostgreSQL).
     *   Opciones de conectividad y seguridad (IPs autorizadas, proxy de autenticación).
 ### **Actividades Prácticas:**
 *   **Laboratorio Práctico (Hands-On Lab):**
     *   Crear un bucket en Cloud Storage.
-        ![alt text](image-1.png)
         ![alt text](image-2.png)
+        ![alt text](image-1.png)
         ![alt text](image-3.png)
         ![alt text](image-4.png)
 
         1. Habilitar conexiones seguras (muy importante)
             🔹 Opción A — Cloud SQL Auth Proxy (recomendada)
-                Instala el Proxy: https://cloud.google.com/sql/docs/mysql/sql-proxy?hl=es-419
-                Lo ejecutas así: ./cloud-sql-proxy --port 3306 <INSTANCE_CONNECTION_NAME>
+                Instala el Proxy: 
+                [URL](https://cloud.google.com/sql/docs/mysql/sql-proxy?hl=es-419)
+                [EXE](https://storage.googleapis.com/cloud-sql-connectors/cloud-sql-proxy/v2.18.2/cloud-sql-proxy.x64.exe)
+                Lo ejecutas así: cloud-sql-proxy --port 3306 <INSTANCE_CONNECTION_NAME>
             🔹 Opción B — Agregar tu IP pública al Authorized Network
                 En Cloud SQL → Tu instancia → Connections → “Add network”.
         2. Crear usuario y base dentro del motor (MySQL/PostgreSQL/SQL Server)
@@ -44,14 +48,16 @@ Esta clase de 4 horas inicia el **Módulo 2**, enfocándose en las soluciones de
             CREATE USER 'rodrigo'@'%' IDENTIFIED BY 'TuPasswordSegura';
             GRANT ALL PRIVILEGES ON miclase.* TO 'rodrigo'@'%';
         3. Conectarte:
-            Desde tu PC
+            - Desde tu PC
                 Cuando el Proxy esté corriendo:
+                ```
                     Host: 127.0.0.1
                     Puerto: 3306
                     Usuario: el que creaste
                     Password: la que definiste
                     Base de datos: miclase
-            Desde Cloud SQL Studio
+                ```
+            - Desde Cloud SQL Studio
                 ![alt text](image-5.png)
                 ![alt text](image-6.png)
                 ![alt text](image-7.png)
