@@ -1,0 +1,86 @@
+-- 🔍 1. Ver todas las cuentas con su estado, banco, sucursal y titular
+SELECT 
+    c.NUMCONTRATO,
+    e.BANCO,
+    s.SUCURSAL,
+    est.DESCRIPCION AS ESTADO_CUENTA,
+    p.NOMBRES,
+    p.APE_PAT
+FROM CUENTA c
+JOIN ENTIDAD e ON c.COD_BCO = e.COD_BCO
+JOIN SUCURSAL s ON c.COD_SUC = s.COD_SUC
+JOIN ESTADO est ON c.CODESTCTA = est.CODESTCTA
+JOIN PERSONA p ON c.RUT = p.RUT;
+
+
+-- 🔍 2. Tarjetas operativas con datos del cliente y banco
+SELECT 
+    t.PAN,
+    si.DESCRIPCION AS SITUACION,
+    e.BANCO,
+    s.SUCURSAL,
+    p.NOMBRES,
+    p.APE_PAT
+FROM TARJETA t
+JOIN SITUACION si ON t.INDSITUAR = si.INDSITUAR
+JOIN ENTIDAD e ON t.ENTIDAD = e.COD_BCO
+JOIN SUCURSAL s ON t.SUCURSAL = s.COD_SUC
+JOIN PERSONA p ON t.RUT = p.RUT
+WHERE si.DESCRIPCION = 'OPERATIVA';
+
+
+-- 🔍 3. Contar cuántas cuentas tiene cada cliente
+SELECT 
+    p.RUT,
+    CONCAT(p.NOMBRES, ' ', p.APE_PAT) AS CLIENTE,
+    COUNT(*) AS TOTAL_CUENTAS
+FROM CUENTA c
+JOIN PERSONA p ON c.RUT = p.RUT
+GROUP BY p.RUT;
+
+
+-- 🔍 4. Listar tarjetas por estado (bloqueadas, operativas, fraude)
+SELECT 
+    si.DESCRIPCION AS ESTADO_TARJETA,
+    COUNT(*) AS TOTAL
+FROM TARJETA t
+JOIN SITUACION si ON t.INDSITUAR = si.INDSITUAR
+GROUP BY si.DESCRIPCION
+ORDER BY TOTAL DESC;
+
+
+-- 🔍 5. Cuentas activas y vencidas según fecha
+SELECT
+    NUMCONTRATO,
+    FECALTA,
+    FECBAJA,
+    CASE 
+        WHEN FECBAJA IS NULL THEN 'VIGENTE'
+        ELSE 'CERRADA'
+    END AS SITUACION
+FROM CUENTA;
+
+
+-- 🔍 6. Clientes con tarjeta y sin tarjeta
+SELECT 
+    p.RUT,
+    CONCAT(p.NOMBRES, ' ', p.APE_PAT) AS CLIENTE,
+    CASE WHEN t.PAN IS NULL THEN 'SIN TARJETA'
+         ELSE 'CON TARJETA'
+    END AS ESTADO_TARJETA
+FROM PERSONA p
+LEFT JOIN TARJETA t ON p.RUT = t.RUT;
+
+
+-- 🔍 7. Vista avanzada tipo banca real
+SELECT
+    p.RUT,
+    CONCAT(p.NOMBRES, ' ', p.APE_PAT) AS CLIENTE,
+    COUNT(DISTINCT c.NUMCONTRATO) AS CUENTAS,
+    COUNT(DISTINCT t.PAN) AS TARJETAS,
+    SUM(CASE WHEN est.DESCRIPCION = 'MOROSIDAD LEVE' THEN 1 ELSE 0 END) AS CUENTAS_EN_MORA
+FROM PERSONA p
+LEFT JOIN CUENTA c ON p.RUT = c.RUT
+LEFT JOIN ESTADO est ON c.CODESTCTA = est.CODESTCTA
+LEFT JOIN TARJETA t ON p.RUT = t.RUT
+GROUP BY p.RUT;

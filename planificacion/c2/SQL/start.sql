@@ -4,7 +4,7 @@ CREATE DATABASE Banco;
 USE Banco;
 
 -- 0. Crear Usuario:
-CREATE USER 'rodrigo'@'%' IDENTIFIED BY 'TuPasswordSegura';
+CREATE USER 'rodrigo'@'%' IDENTIFIED BY 'TuPasswordSegura1!';
 GRANT ALL PRIVILEGES ON Banco.* TO 'rodrigo'@'%';
 
 -- 1. Crear tablas:
@@ -173,9 +173,9 @@ SELECT 'CUENTA', COUNT(*) FROM CUENTA
 UNION ALL
 SELECT 'TARJETA', COUNT(*) FROM TARJETA;
 
-DROP DATABASE IF EXISTS Banco;
-DROP DATABASE IF EXISTS emprendimiento; -- extra
-DROP DATABASE IF EXISTS evaluacion_grupal;
-DROP DATABASE IF EXISTS datosrelacional;
-DROP DATABASE IF EXISTS prueba;
-DROP DATABASE IF EXISTS estado;
+-- DROP DATABASE IF EXISTS Banco;
+-- DROP DATABASE IF EXISTS emprendimiento; -- extra
+-- DROP DATABASE IF EXISTS evaluacion_grupal;
+-- DROP DATABASE IF EXISTS datosrelacional;
+-- DROP DATABASE IF EXISTS prueba;
+-- DROP DATABASE IF EXISTS estado;
