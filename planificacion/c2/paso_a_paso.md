@@ -3,6 +3,8 @@
 ```bash
 gcloud auth application-default login
 cloud-sql-proxy --port 3306 clase-2-478918:southamerica-west1:clase-2
+cloud-sql-proxy --port 3306 clase-2-478918:southamerica-west1:clase2-icc
+cloud-sql-proxy --port 3306 clase-2-478918:southamerica-west1:clase-2-jcristensen
 ```
 
 2025/11/20 22:31:33 Authorizing with Application Default Credentials

@@ -1,9 +1,19 @@
 -- 💳 2. Crear un evento que marque tarjetas como CADUCADAS automáticamente
 SELECT INDSITUAR FROM SITUACION WHERE DESCRIPCION = 'CADUCADA';
 
+CREATE EVENT IF NOT EXISTS ev_actualizar_tarjetas_caducadas
+ON SCHEDULE EVERY 1 DAY
+DO
+    UPDATE TARJETA
+    SET INDSITUAR = 7
+    WHERE FECCADU < CURDATE();
+
+-- 💳 2. Crear un evento que marque tarjetas como CADUCADAS automáticamente
+SELECT INDSITUAR FROM SITUACION WHERE DESCRIPCION = 'CADUCADA';
 
 CREATE EVENT IF NOT EXISTS ev_actualizar_tarjetas_caducadas
 ON SCHEDULE EVERY 1 DAY
+STARTS (TIMESTAMP(CURRENT_DATE) + INTERVAL 1 DAY)
 DO
     UPDATE TARJETA
     SET INDSITUAR = 7

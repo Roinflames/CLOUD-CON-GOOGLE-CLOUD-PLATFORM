@@ -21,6 +21,12 @@ gcloud compute instances create <NOMBRE> \
 # 3. Administrar instancias
 ## Detener instancia
 gcloud compute instances stop <NOMBRE> --zone=us-central1-a
+gcloud compute instances stop clase-2 --zone=southamerica-west1
+gcloud compute instances stop clase-2-jcristensen --zone=southamerica-west1
+gcloud compute instances stop clase-2-marybel --zone=southamerica-west1
+gcloud compute instances stop clase-2-rodrigo-reyes --zone=southamerica-west1
+gcloud compute instances stop clase-2-icc --zone=southamerica-west1
+gcloud compute instances stop clase2dam --zone=southamerica-west1
 
 ## Iniciar instancia
 gcloud compute instances start <NOMBRE> --zone=us-central1-a

@@ -1,27 +1,16 @@
 -- 🧩 1. Función: obtener nombre completo del cliente
-DELIMITER $$
-
-CREATE FUNCTION fn_nombre_completo(rut_in INT)
+CREATE FUNCTION `Banco`.fn_nombre_completo(rut_in INT)
 RETURNS VARCHAR(100)
 DETERMINISTIC
-BEGIN
-    DECLARE nombre VARCHAR(100);
-
+RETURN (
     SELECT CONCAT(NOMBRES, ' ', APE_PAT, ' ', IFNULL(APE_MAT, ''))
-    INTO nombre
     FROM PERSONA
-    WHERE RUT = rut_in;
-
-    RETURN nombre;
-END$$
-
-DELIMITER ;
-
+    WHERE RUT = rut_in
+);
+-- Consultar fn_nombre_completo
 SELECT fn_nombre_completo(12345678);
 
 -- 🏦 2. Función: obtener estado textual de una cuenta
-DELIMITER $$
-
 CREATE FUNCTION fn_estado_cuenta(cod INT)
 RETURNS VARCHAR(30)
 DETERMINISTIC
@@ -34,15 +23,13 @@ BEGIN
     WHERE CODESTCTA = cod;
 
     RETURN estado;
-END$$
+END;
 
-DELIMITER ;
 
+-- Consultar
 SELECT fn_estado_cuenta(1);
 
 -- 💳 3. Función: obtener situación de tarjeta
-DELIMITER $$
-
 CREATE FUNCTION fn_situacion_tarjeta(id_situacion INT)
 RETURNS VARCHAR(30)
 DETERMINISTIC
@@ -55,29 +42,29 @@ BEGIN
      WHERE INDSITUAR = id_situacion;
 
     RETURN situacion;
-END$$
+END;
 
-DELIMITER ;
 
+-- Consultar
 SELECT fn_situacion_tarjeta(5);
 
 -- 🗓️ 4. Función: calcular años vigencia de la cuenta
-DELIMITER $$
+
 
 CREATE FUNCTION fn_antiguedad_cuenta(fecha_alta DATE)
 RETURNS INT
 DETERMINISTIC
 BEGIN
     RETURN TIMESTAMPDIFF(YEAR, fecha_alta, CURDATE());
-END$$
+END;
 
-DELIMITER ;
 
+-- Consultar
 SELECT fn_antiguedad_cuenta('2020-05-10');
 
 
 -- 🔐 5. Función: validar RUT sencillo (formato numérico)
-DELIMITER $$
+
 
 CREATE FUNCTION fn_validar_rut(rut_in INT)
 RETURNS TINYINT
@@ -88,14 +75,14 @@ BEGIN
     END IF;
 
     RETURN 1;      -- válido
-END$$
+END;
 
-DELIMITER ;
 
+-- Consultar
 SELECT fn_validar_rut(12345678);
 
 -- 📊 6. Función: contar tarjetas activas de un cliente
-DELIMITER $$
+
 
 CREATE FUNCTION fn_tarjetas_activas(rut_in INT)
 RETURNS INT
@@ -110,8 +97,8 @@ BEGIN
       AND s.DESCRIPCION = 'OPERATIVA';
 
     RETURN total;
-END$$
+END;
 
-DELIMITER ;
 
+-- Consultar
 SELECT fn_tarjetas_activas(12345678);

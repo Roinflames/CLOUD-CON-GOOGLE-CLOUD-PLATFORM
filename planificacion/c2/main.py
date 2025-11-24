@@ -21,8 +21,9 @@ engine = create_engine(
 # --- PRUEBA DE CONEXIÓN ---
 try:
     with engine.connect() as conn:
-        # result = conn.execute(text("SELECT 1"))
-        result = conn.execute(text("SELECT * FROM PERSONA"))
+        # result = conn.execute(text("SELECT * FROM PERSONA;"))
+        # result = conn.execute(text("SELECT c.NUMCONTRATO, e.BANCO, s.SUCURSAL, est.DESCRIPCION AS ESTADO_CUENTA, p.NOMBRES, p.APE_PAT FROM CUENTA c JOIN ENTIDAD e ON c.COD_BCO = e.COD_BCO JOIN SUCURSAL s ON c.COD_SUC = s.COD_SUC JOIN ESTADO est ON c.CODESTCTA = est.CODESTCTA JOIN PERSONA p ON c.RUT = p.RUT;"))
+        result = conn.execute(text("SELECT fn_nombre_completo(56789012);"))
         for row in result:
             print(row)
 
