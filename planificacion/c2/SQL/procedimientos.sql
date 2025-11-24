@@ -1,6 +1,6 @@
 -- ✅ 1. Procedimiento: Registrar un movimiento y actualizar saldo
 -- Registra depósitos o retiros validando que exista saldo suficiente.
-DELIMITER $$
+DROP PROCEDURE IF EXISTS RegistrarMovimiento;
 
 CREATE PROCEDURE RegistrarMovimiento(
     IN pCuentaID INT,
@@ -39,9 +39,8 @@ BEGIN
         WHERE CuentaID = pCuentaID;
     END IF;
 
-END$$
+END;
 
-DELIMITER ;
 
 
 -- ✅ 2. Procedimiento: Transferencia entre cuentas
@@ -98,12 +97,14 @@ DELIMITER ;
 
 -- ✅ 3. Procedimiento: Obtener resumen de un cliente
 -- Devuelve total de cuentas, saldo total, últimos movimientos.
-DELIMITER $$
+DROP PROCEDURE IF EXISTS ResumenCliente;
 
 CREATE PROCEDURE ResumenCliente(IN pUsuarioID INT)
 BEGIN
     -- Cuentas del usuario
-    SELECT * FROM Cuentas WHERE UsuarioID = pUsuarioID;
+    SELECT * 
+    FROM Cuentas 
+    WHERE UsuarioID = pUsuarioID;
 
     -- Saldo total
     SELECT SUM(Saldo) AS SaldoTotal
@@ -117,6 +118,5 @@ BEGIN
     WHERE C.UsuarioID = pUsuarioID
     ORDER BY FechaMovimiento DESC
     LIMIT 10;
-END$$
+END;
 
-DELIMITER ;

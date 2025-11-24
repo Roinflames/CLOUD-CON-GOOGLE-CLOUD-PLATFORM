@@ -2,7 +2,7 @@
 
 ```bash
 gcloud auth application-default login
-cloud-sql-proxy --port 3306 plantiwuisserviceacc:southamerica-west1:free-trial-first-project
+cloud-sql-proxy --port 3306 clase-2-478918:southamerica-west1:clase-2
 ```
 
 2025/11/20 22:31:33 Authorizing with Application Default Credentials
