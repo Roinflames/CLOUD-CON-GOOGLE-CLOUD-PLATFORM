@@ -14,11 +14,15 @@ gcloud version
 ## Iniciar sesión dentro de GCP
 gcloud auth login
 
+## 
+gcloud projects list
+
 ### Establecer el Proyecto Activo
 Define el proyecto de GCP sobre el cual quieres trabajar. Todos los comandos posteriores se ejecutarán en el contexto de este proyecto.
 ```bash
 gcloud config set project PROJECT_ID
 gcloud config set project plantiwuisserviceacc
+gcloud config set project clase-2-478918
 ```
 
 ### Etiquetas
