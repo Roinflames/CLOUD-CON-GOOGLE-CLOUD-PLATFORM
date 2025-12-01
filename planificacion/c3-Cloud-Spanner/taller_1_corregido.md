@@ -21,7 +21,7 @@ APIs & Services → Enable APIs → Cloud Spanner API
 
 Ir a: Spanner → Instances → Create Instance
 
-Nombre: instancia-taller1
+Nombre: instancia-taller1-<nombre_alumno>
 
 ID: instancia-taller1
 
@@ -35,58 +35,60 @@ Crear base de datos:
 Nombre: taller_cloud_spanner
 
 Esquema inicial:
-CREATE TABLE Customers (
+
+CREATE TABLE Clientes (
   CustomerID STRING(36) NOT NULL,
   Name STRING(100),
-  Email STRING(100),
+  Email STRING(100)
 ) PRIMARY KEY (CustomerID);
 
-CREATE TABLE Orders (
+CREATE TABLE Ordenes (
   OrderID STRING(36) NOT NULL,
   CustomerID STRING(36) NOT NULL,
   TotalAmount FLOAT64,
-  CreatedAt TIMESTAMP OPTIONS (allow_commit_timestamp = true),
+  CreatedAt TIMESTAMP OPTIONS (allow_commit_timestamp = true)
 ) PRIMARY KEY (OrderID),
-INTERLEAVE IN PARENT Customers ON DELETE CASCADE;
+  INTERLEAVE IN PARENT Clientes ON DELETE CASCADE;
+
 
 # 📥 Parte 3: Insertar Datos (DML)
 Insertar clientes
-INSERT INTO Customers (CustomerID, Name, Email)
+INSERT INTO Clientes (CustomerID, Name, Email)
 VALUES ("CUST-001", "Juan Pérez", "juan@example.com"),
        ("CUST-002", "Ana Gómez", "ana@example.com");
 
 Insertar órdenes
-INSERT INTO Orders (OrderID, CustomerID, TotalAmount, CreatedAt)
+INSERT INTO Ordenes (OrderID, CustomerID, TotalAmount, CreatedAt)
 VALUES ("ORD-1001", "CUST-001", 12500, PENDING_COMMIT_TIMESTAMP()),
        ("ORD-1002", "CUST-002", 8400, PENDING_COMMIT_TIMESTAMP());
 
 # 🔍 Parte 4: Consultas
 ## 1. Obtener todos los clientes:
-SELECT * FROM Customers;
+SELECT * FROM Clientes;
 
 ## 2. Obtener las órdenes de un cliente:
 SELECT c.Name, o.OrderID, o.TotalAmount
-FROM Customers c
-JOIN Orders o ON c.CustomerID = o.CustomerID
+FROM Clientes c
+JOIN Ordenes o ON c.CustomerID = o.CustomerID
 WHERE c.CustomerID = "CUST-001";
 
 ## 3. Total general de ventas:
-SELECT SUM(TotalAmount) AS TotalVentas FROM Orders;
+SELECT SUM(TotalAmount) AS TotalVentas FROM Ordenes;
 
 ## ✏️ Parte 5: Actualizar Datos
 
 Modificar correo de un cliente:
 
-UPDATE Customers
+UPDATE Clientes
 SET Email = "juanperez@example.com"
 WHERE CustomerID = "CUST-001";
 
 ## 🗑️ Parte 6: Eliminar Registros
-DELETE FROM Customers
+DELETE FROM Clientes
 WHERE CustomerID = "CUST-002";
 
 
-(Se eliminarán automáticamente sus Orders gracias a INTERLEAVE + ON DELETE CASCADE)
+(Se eliminarán automáticamente sus Ordenes gracias a INTERLEAVE + ON DELETE CASCADE)
 
 # 💡 Preguntas de Reflexión (para entregar o discutir)
 
@@ -111,3 +113,5 @@ Código SQL utilizado
 Resultados de consultas
 
 Respuestas a preguntas de reflexión
+
+![alt text](image.png)

@@ -1,4 +1,4 @@
-# [Clase 4: Fin de Migración e Introducción a BigQuery]()
+# [Clase 4: Fin de Migración e Introducción a BigQuery](https://gamma.app/docs/Clase-4-Fin-de-Migracion-e-Introduccion-a-BigQuery-ydopozmye718s3n?mode=doc)
 
 ## Resumen de la Clase
 

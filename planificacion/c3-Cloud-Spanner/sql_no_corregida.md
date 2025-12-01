@@ -1,0 +1,1 @@
+CREATE TABLE Customers ( CustomerID STRING(36) NOT NULL, Name STRING(100), Email STRING(100), ) PRIMARY KEY (CustomerID); CREATE TABLE Orders ( OrderID STRING(36) NOT NULL, CustomerID STRING(36) NOT NULL, TotalAmount FLOAT64, CreatedAt TIMESTAMP OPTIONS (allow_commit_timestamp = true), ) PRIMARY KEY (OrderID), INTERLEAVE IN PARENT Customers ON DELETE CASCADE;

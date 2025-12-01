@@ -33,3 +33,7 @@ En esta sesión de 4 horas, finalizaremos el **Módulo 2** explorando bases de d
 *   **Taller de Migración de Datos (Parte 1):**
     *   Planificación de un escenario de migración simple.
     *   Ejercicio práctico: Mover datos desde un archivo CSV a una tabla de Cloud SQL usando herramientas de importación.
+
+Database Migration API
+Service Networking API
+

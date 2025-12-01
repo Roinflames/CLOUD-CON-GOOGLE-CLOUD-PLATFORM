@@ -1,0 +1,5 @@
+DROP TABLE IF EXISTS `Customers`;
+DROP PROPERTY GRAPH IF EXISTS ECommerceGraph;
+DROP TABLE IF EXISTS `OrderItems`;
+DROP INDEX OrderStatusIndex;
+DROP TABLE `Orders`;
