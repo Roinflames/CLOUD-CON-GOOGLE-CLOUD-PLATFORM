@@ -1,4 +1,4 @@
-# Clase 6: De BigQuery a la Visualización de Datos
+# [Clase 6: De BigQuery a la Visualización de Datos](https://lookerstudio.google.com/u/0/navigation/reporting)
 
 ## Resumen de la Clase
 
